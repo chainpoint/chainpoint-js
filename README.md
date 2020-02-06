@@ -10,15 +10,15 @@
 
 A client for creating and verifying [Chainpoint](https://chainpoint.org) proofs.
 
-The Chainpoint Client handles communication with a distributed network of Nodes that make up the Chainpoint Network.
+The Chainpoint-JS Client handles communication with a distributed network of Nodes that make up the Chainpoint Network.
 
-The Chainpoint Client lets you submit hashes to a Chainpoint Node on the Chainpoint Network. Nodes periodically aggregate hashes and send data to Core for anchoring the hash to public blockchains.
+The Chainpoint-JS Client lets you submit hashes to a Chainpoint Gateway on the Chainpoint Network. Gateways periodically aggregate hashes and send data to Core for anchoring the hash to public blockchains.
 
-The Chainpoint Client lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
+The Chainpoint-JS Client lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
 
 This client can be used in both Browser and Node.js based JavaScript applications using `callback` functions, Promises (using `.then`, `.catch`), or Promises (using `async`/`await`) functional styles.
 
-**Important:** This library has been updated for v2 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with nodes on the new network.
+**Important:** This library has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with nodes on the new network.
 If you would like to still use this library for older proofs, please downgrade to v1.x.x
 
 ## Proof Creation and Verification Overview
@@ -27,11 +27,11 @@ Creating a Chainpoint proof is an asynchronous process. This client handles all 
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Node. The Node will return a Version 1 UUID for each hash submitted. This `hashidNode` is used later for retrieving a proof.
+This is an HTTP request that passes an Array of hash(es) to a Node. The Node will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof.
 
 ### Get Proof(s)
 
-Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint Core. This takes up to ten seconds. Retrieving a `hashIdNode` at this stage returns a proof anchored to the Calendar.
+Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint Core. This takes up to a minute. Retrieving a `proofId` at this stage returns a proof anchored to the Calendar.
 
 Proofs are appended with data as they are anchored to additional blockchains. For example, it takes 60 - 90 minutes to anchor a proof to Bitcoin. Calling getProofs will now append the first proof with data that anchors it to the Bitcoin Blockchain.
 
@@ -105,7 +105,7 @@ The `hashes` argument expects an Array of hashes, where each hash is a Hexadecim
 
 We recommend using the SHA-256 cryptographic one-way hash function for all hashes submitted.
 
-The optional `uris` argument accepts an Array of Node URI's as returned by the `getNodes()` function. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
+The optional `uris` argument accepts an Array of Gateway URI's as returned by the `getNodes()` function. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
 
 #### Return Values
 
@@ -115,11 +115,11 @@ The Array of Objects, referred to as `proofHandles` can also be submitted direct
 
 The Object will contain:
 
-`uri` : The URI of the Node(s) the hash was submitted to. This is the only Node that can retrieve this particular proof.
+`uri` : The URI of the Gateway(s) the hash was submitted to. This is the only Node that can retrieve this particular proof.
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
-`hashIdNode` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Node it was submitted to.
+`ProofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
 
 `groupId` : A Version 1 UUID which is used to group Proof Handles that have the same corresponding hash. The groupId can later be used to optimize the proof retrieval process.
 
@@ -148,7 +148,7 @@ Example Return Value
 
 Use this function to submit hashes calculated from an Array of file paths, and receive back the information needed to later retrieve a proof for each of those hashes using the `getProofs()` function.
 
-By default hashes are submitted to three Nodes to help ensure a proof will become available at the appropriate time. Only one such proof need be permanently stored, the others provide redundancy.
+By default hashes are submitted to three Gateways to help ensure a proof will become available at the appropriate time. Only one such proof need be permanently stored, the others provide redundancy.
 
 #### Arguments
 
@@ -170,7 +170,7 @@ The Object will contain:
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
-`hashIdNode` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Node it was submitted to.
+`ProofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
 
 `path` : The path of the file represented by this object.
 
@@ -201,15 +201,15 @@ Example Return Value
 
 #### Description
 
-This function is used to retrieve Chainpoint proofs from the Nodes that are responsible for creating each proof.
+This function is used to retrieve Chainpoint proofs from the Gateways that are responsible for creating each proof.
 
 #### Arguments
 
-The `proofHandles` argument accepts an Array of Objects. Each object must have the `uri` and `hashIdNode` properties. The argument is of the same form as the output from the `submitHashes()` function.
+The `proofHandles` argument accepts an Array of Objects. Each object must have the `uri` and `proofId` properties. The argument is of the same form as the output from the `submitHashes()` function.
 
 The `uri` property should be the base URI (e.g. `http://0.0.0.0`) of an online Node that is responsible for generating a particular proof.
 
-The `hashIdNode` property is a valid Version 1 UUID as provided by the return of the `submitHashes()` function.
+The `proofId` property is a valid Version 1 UUID as provided by the return of the `submitHashes()` function.
 
 #### Return Values
 
@@ -223,7 +223,7 @@ This function will return an Array of Objects, each composed of the following pr
 }
 ```
 
-`hashIdNode` : The Version 1 UUID used to retrieve the proof.
+`proofId` : The Version 1 UUID used to retrieve the proof.
 
 `proof` : The Base64 encoded binary form of the proof. See [https://github.com/chainpoint/chainpoint-binary](https://github.com/chainpoint/chainpoint-binary) for more information about proof formats. That library can also be used to convert from one form to another. If the proof is not yet available, or cannot be retrieved, this will be set to `null`.
 
@@ -275,8 +275,8 @@ Example Return Value
 ;[
   {
     hash: 'daeaedcd320c0fb2adefaab15ec03a424bb7a89aa0ec918c6c4906c366c67e36',
-    proof_id: "5e0433d0-46da-11ea-a79e-017f19452571",
-    hash_received: "2020-02-03T23:10:28Z",
+    proof_id: '5e0433d0-46da-11ea-a79e-017f19452571',
+    hash_received: '2020-02-03T23:10:28Z',
     uri: 'http://127.0.0.1/calendar/695928/hash',
     type: 'cal',
     anchorId: '695928',
@@ -286,8 +286,8 @@ Example Return Value
   },
   {
     hash: 'daeaedcd320c0fb2adefaab15ec03a424bb7a89aa0ec918c6c4906c366c67e36',
-    proof_id: "5e0433d0-46da-11ea-a79e-017f19452571",
-    hash_received: "2020-02-03T23:10:28Z",
+    proof_id: '5e0433d0-46da-11ea-a79e-017f19452571',
+    hash_received: '2020-02-03T23:10:28Z',
     uri: 'http://127.0.0.1/calendar/696030/data',
     type: 'btc',
     anchorId: '496469',
@@ -330,8 +330,8 @@ Example Return Value
 ;[
   {
     hash: 'daeaedcd320c0fb2adefaab15ec03a424bb7a89aa0ec918c6c4906c366c67e36',
-    proof_id: "5e0433d0-46da-11ea-a79e-017f19452571",
-    hash_received: "2020-02-03T23:10:28Z",
+    proof_id: '5e0433d0-46da-11ea-a79e-017f19452571',
+    hash_received: '2020-02-03T23:10:28Z',
     uri: 'http://127.0.0.1/calendar/695928/hash',
     type: 'cal',
     anchorId: '695928',
@@ -339,8 +339,8 @@ Example Return Value
   },
   {
     hash: 'daeaedcd320c0fb2adefaab15ec03a424bb7a89aa0ec918c6c4906c366c67e36',
-    proof_id: "5e0433d0-46da-11ea-a79e-017f19452571",
-    hash_received: "2020-02-03T23:10:28Z",
+    proof_id: '5e0433d0-46da-11ea-a79e-017f19452571',
+    hash_received: '2020-02-03T23:10:28Z',
     uri: 'http://127.0.0.1/calendar/696030/data',
     type: 'btc',
     anchorId: '496469',
