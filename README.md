@@ -217,7 +217,7 @@ This function will return an Array of Objects, each composed of the following pr
 
 ```javascript
 {
-    hashIdNode: "",
+    proofId: "",
     proof: "",
     anchorsComplete: []
 }
