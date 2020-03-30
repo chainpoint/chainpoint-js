@@ -35,7 +35,7 @@ Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint
 
 Proofs are appended with data as they are anchored to additional blockchains. For example, it takes 60 - 90 minutes to anchor a proof to Bitcoin. Calling getProofs will now append the first proof with data that anchors it to the Bitcoin Blockchain.
 
-Nodes retain proofs for 24 hours. Each client must retrieve and permanently store each Chainpoint proof.
+Gateways retain proofs for 24 hours. Each client must retrieve and permanently store each Chainpoint proof.
 
 ### Verify Proof(s)
 
@@ -97,7 +97,7 @@ Additionally, the output of each function in the process has been designed so th
 
 Use this function to submit an Array of hashes, and receive back the information needed to later retrieve a proof for each of those hashes using the `getProofs()` function.
 
-By default hashes are submitted to three Nodes to help ensure a proof will become available at the appropriate time. Only one such proof need be permanently stored, the others provide redundancy.
+By default hashes are submitted to Gateways to help ensure a proof will become available at the appropriate time. Only one such proof need be permanently stored, the others provide redundancy.
 
 #### Arguments
 
@@ -105,7 +105,7 @@ The `hashes` argument expects an Array of hashes, where each hash is a Hexadecim
 
 We recommend using the SHA-256 cryptographic one-way hash function for all hashes submitted.
 
-The optional `uris` argument accepts an Array of Gateway URI's as returned by the `getNodes()` function. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
+The optional `uris` argument accepts an Array of Gateway URIs. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
 
 #### Return Values
 
@@ -156,7 +156,7 @@ The `paths` argument expects an Array of valid file paths.
 
 The SHA-256 cryptographic one-way hash function will be used on all files in the paths submitted.
 
-The optional `uris` argument accepts an Array of Node URI's as returned by the `getNodes()` function. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
+The optional `uris` argument accepts an Array of Gateways URIs. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
 
 #### Return Values
 
@@ -367,22 +367,6 @@ The optional `num` argument determines the maximum number of Cores that should b
 
 This function returns an Array of String URIs.
 
-### `getNodes (num)`
-
-#### Description
-
-This is a utility function that allows you to perform DNS based auto-discovery of Node URIs.
-
-This function is not required to be explicitly called when using the main functions of this library. It will be called internally as needed.
-
-#### Arguments
-
-The optional `num` argument determines the maximum number of Nodes that should be returned in a single request in randomized order. The number of URI's returned are ultimately limited by the number of Nodes returned by Core's auto-discovery mechanism.
-
-#### Return Values
-
-This function returns an Array of String URIs. The list of Nodes returned are for Nodes that have recently been audited and found to be healthy.
-
 ## Usage : Functional Styles
 
 This client can be used with several popular JavaScript API styles in both Node.js and the Browser.
@@ -418,7 +402,7 @@ var cp = require('chainpoint-client')
 
 let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
 
-cp.submitHashes(hashes, testNodesArray)
+cp.submitHashes(hashes, testGatewaysArray)
   .then(function(data) {
     // `data` will contain the returned values
     console.log(JSON.stringify(data, null, 2))
