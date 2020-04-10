@@ -1,10 +1,10 @@
 # Chainpoint Client (JavaScript)
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![npm](https://img.shields.io/npm/l/chainpoint-client.svg)](https://www.npmjs.com/package/chainpoint-client)
-[![npm](https://img.shields.io/npm/v/chainpoint-client.svg)](https://www.npmjs.com/package/chainpoint-client)
-[![Build Status](https://travis-ci.com/chainpoint/chainpoint-client-js.svg?branch=master)](https://travis-ci.com/chainpoint/chainpoint-client-js)
-[![Coverage Status](https://coveralls.io/repos/github/chainpoint/chainpoint-client-js/badge.svg?branch=master)](https://coveralls.io/github/chainpoint/chainpoint-client-js?branch=master)
+[![npm](https://img.shields.io/npm/l/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
+[![npm](https://img.shields.io/npm/v/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
+[![Build Status](https://travis-ci.com/chainpoint/chainpoint-js.svg?branch=master)](https://travis-ci.com/chainpoint/chainpoint-js)
+[![Coverage Status](https://coveralls.io/repos/github/chainpoint/chainpoint-js/badge.svg?branch=master)](https://coveralls.io/github/chainpoint/chainpoint-js?branch=master)
 
 ## About
 
@@ -382,7 +382,7 @@ being targetted. Each public API exported from this module supports each style e
 ### Callback Style Example [DEPRECATED]
 
 ```javascript
-var cp = require('chainpoint-client')
+var cp = require('chainpoint-js')
 
 let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
 
@@ -400,7 +400,7 @@ cp.submitHashes(hashes, function(err, data) {
 ### Promises `.then/.catch` Style Example
 
 ```javascript
-var cp = require('chainpoint-client')
+var cp = require('chainpoint-js')
 
 let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
 
@@ -418,7 +418,7 @@ cp.submitHashes(hashes, testGatewaysArray)
 ### Promises `async/await` Style Example
 
 ```javascript
-var cp = require('chainpoint-client')
+var cp = require('chainpoint-jst')
 
 let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
 
@@ -432,16 +432,16 @@ runIt()
 
 ### JavaScript Client-Side Frameworks Example
 
-Note: If you are using any client-side JavaScript framework (ex. Angular, React, etc) remember to import chainpoint-client in the following manner:
+Note: If you are using any client-side JavaScript framework (ex. Angular, React, etc) remember to import chainpoint-js in the following manner:
 
 ```js
-import chainpoint from 'chainpoint-client/dist/bundle.web'
+import chainpoint from 'chainpoint-js/dist/bundle.web'
 ```
 
 or
 
 ```js
-const chainpoint = require('chainpoint-client/dist/bundle.web')
+const chainpoint = require('chainpoint-js/dist/bundle.web')
 ```
 
 ### Browser Script Tag Example
@@ -451,7 +451,7 @@ You can copy `dist/bundle.web.js` into your app to be served from your own web s
 Or install the `npm` package in a place available to your web server pages and set the `script src` tag as shown in the example below. A set of window global functions (e.g. `chainpointClient.submitHashes()`) will then be available for use in a fashion similar to that shown in the examples above.
 
 ```html
-<script src="./node_modules/chainpoint-client/dist/bundle.web.js">
+<script src="./node_modules/chainpoint-js/dist/bundle.web.js">
 ```
 
 ## License
