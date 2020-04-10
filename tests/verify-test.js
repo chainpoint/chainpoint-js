@@ -15,7 +15,6 @@ import sinon from 'sinon'
 import nock from 'nock'
 
 import { verifyProofs } from '../index'
-import { network } from '../lib/utils'
 import * as evaluate from '../lib/evaluate'
 import proofs from './data/proofs'
 import uris from './data/nodes'
@@ -55,12 +54,6 @@ describe('verifyProofs', function() {
     }
 
     expect(invalidUri, 'Should have thrown error when passed invalid uri').to.be.true
-
-    sinon.stub(network, 'getNodes').callsFake(() => uris)
-
-    await verifyProofs(proof)
-
-    expect(network.getNodes.called).to.be.true
   })
 
   it('should verify all proofs against a single node at path /calendar/[ANCHOR_ID]/data', async () => {

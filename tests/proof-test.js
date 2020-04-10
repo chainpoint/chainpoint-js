@@ -35,12 +35,12 @@ describe('proof utilities', () => {
       expect(isValidProofHandle(mockHandle), 'should not accept empty objects').to.be.false
       expect(isValidProofHandle('I am not an object!'), 'Should only accept objects').to.be.false
       mockHandle.uri = 'http://35.212.136.230'
-      expect(isValidProofHandle(mockHandle), 'should fail without hashIdNode property').to.be.false
+      expect(isValidProofHandle(mockHandle), 'should fail without proofId property').to.be.false
       delete mockHandle.uri
-      mockHandle.hashIdNode = '4bd142c0-655d-11e9-8108-01842c6b2502'
+      mockHandle.proofId = '4bd142c0-655d-11e9-8108-01842c6b2502'
       expect(isValidProofHandle(mockHandle), 'should fail without uri property').to.be.false
       mockHandle.uri = 'http://35.212.136.230'
-      expect(isValidProofHandle(mockHandle), 'should pass with uri and hashIdNode properties').to.be.true
+      expect(isValidProofHandle(mockHandle), 'should pass with uri and proofId properties').to.be.true
     })
   })
 
@@ -92,7 +92,7 @@ describe('proof utilities', () => {
     it('should skip incorrectly passed args and log errors', () => {
       testArrayArg(normalizeProofs)
       // empty array, null proof, or non-chainpoint type proofs should all fail gracefully
-      let normalized = normalizeProofs([{}, { hashIdNode: 'i-am-an-id', proof: null }, { type: 'foobar' }])
+      let normalized = normalizeProofs([{}, { proofId: 'i-am-an-id', proof: null }, { type: 'foobar' }])
       expect(normalized, 'Array of normalized invalid proofs should have been empty').to.have.length(0)
       expect(console.error.calledThrice, 'Did not log errors for each incorrect proof object').to.be.true
     })

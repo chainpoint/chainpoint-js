@@ -17,7 +17,7 @@ import sinon from 'sinon'
 import { isEqual } from 'lodash'
 
 import submitHashes from '../lib/submit'
-import { network, proofs } from '../lib/utils'
+import { proofs } from '../lib/utils'
 import submitHashesResp from './data/submit-hashes'
 import hashes from './data/hashes'
 import nodes from './data/nodes'
@@ -27,8 +27,7 @@ describe('submitHashes', () => {
   beforeEach(async () => {
     // steb getNodes so that we can be sure it was called
     // but can control what it returns and test expectations
-    let stub = sinon.stub(network, 'getNodes')
-    stub.returns(nodes)
+    let nodes = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
 
     mockResponses = nodes.map((uri, index) =>
       nock(uri)
@@ -92,11 +91,6 @@ describe('submitHashes', () => {
       invalidUri = e.message
     }
     expect(invalidUri).to.have.string('invalid URI', 'Should have thrown for an invalid node URI')
-  })
-
-  it('should get node uris from a core if none are passed', async () => {
-    await submitHashes(hashes)
-    expect(network.getNodes.called).to.be.true
   })
 
   it('should send POST request to nodes with hashes in the request body', async () => {
