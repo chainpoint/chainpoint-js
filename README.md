@@ -50,7 +50,7 @@ This function is similar to the Verify function. The difference with this functi
 [Try It Out with RunKit](https://runkit.com/grempe/tierion-chainpoint-client-async-example)
 
 ```javascript
-const chp = require('chainpoint-client')
+const chp = require('chainpoint-js')
 
 async function runIt() {
   // A few sample SHA-256 proofs to anchor
@@ -60,8 +60,10 @@ async function runIt() {
     '3d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a'
   ]
 
+  let uris = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
+
   // Submit each hash to selected Gateways
-  let proofHandles = await chp.submitHashes(hashes)
+  let proofHandles = await chp.submitHashes(hashes, uris)
   console.log('Submitted Proof Objects: Expand objects below to inspect.')
   console.log(proofHandles)
 
