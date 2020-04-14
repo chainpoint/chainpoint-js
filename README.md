@@ -7,8 +7,6 @@ The package is for the Chainpont v4 Network. If you are looking to work with the
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/l/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
 [![npm](https://img.shields.io/npm/v/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
-[![Build Status](https://travis-ci.com/chainpoint/chainpoint-js.svg?branch=master)](https://travis-ci.com/chainpoint/chainpoint-js)
-[![Coverage Status](https://coveralls.io/repos/github/chainpoint/chainpoint-js/badge.svg?branch=master)](https://coveralls.io/github/chainpoint/chainpoint-js?branch=master)
 
 ## About
 
