@@ -35,19 +35,6 @@ describe('helpers utilities', () => {
     })
   })
 
-  describe('isSecureOrigin', () => {
-    it('should only validate https locations', () => {
-      global.window = {
-        location: {
-          protocol: 'https:'
-        }
-      }
-      expect(helpers.isSecureOrigin()).to.be.true
-      global.window.location.protocol = 'http:'
-      expect(helpers.isSecureOrigin()).to.be.false
-    })
-  })
-
   describe('sha256FileByPath', () => {
     it('should create a sha256 hash of the contents of a file', async () => {
       let text = 'I am some test content'

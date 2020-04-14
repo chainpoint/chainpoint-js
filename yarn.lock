@@ -1564,19 +1564,35 @@ chainpoint-binary@^5.0.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.10"
 
-chainpoint-parse@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-4.0.0.tgz#66b6d23da0a326e9ac02da3338e570717604e9e1"
-  integrity sha512-HNfNys7mHoHnedLJfoktkisTqgIXTOrtTOersRbZ59xmSmp2Fk8bJrRRh8aMr79IxmNHjJXC1HBcGfJiXNo0gA==
+chainpoint-binary@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-binary/-/chainpoint-binary-5.0.1.tgz#88deae6898793f11bff174442ae4b61c677b1b53"
+  integrity sha512-BDl9uTh4rL10oRkjP9y+X7Bt26yN4adBtBBoGgpbelpK6Q+UDcmvvVApR96nIOA1E41Tq47TjKpwDbY5QjlnFA==
   dependencies:
-    chainpoint-binary "^5.0.0"
-    chainpoint-proof-json-schema "^2.0.1"
+    chainpoint-proof-json-schema "^2.0.3"
+    msgpack-lite "^0.1.26"
+    pako "^1.0.10"
+
+chainpoint-parse@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-4.0.1.tgz#24084c80a3ee9721085234eccc008d1402ed9a94"
+  integrity sha512-BFh54kF6Nk+wYUv6qghx6dZ+o4cnHHGmr8pgY1kAvPDmR9uxCnepK1fjgOSONUfDFeWI632gtfTRAl3faKi4YA==
+  dependencies:
+    chainpoint-binary "^5.0.1"
+    chainpoint-proof-json-schema "^2.0.3"
     js-sha3 "^0.8.0"
 
 chainpoint-proof-json-schema@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-2.0.1.tgz#64d83bcf2bf23d5c5194b65e2cc4d955b6ecae0f"
   integrity sha512-mf4YGkq9XGQYuEBmyhYuX7HaF2au/zmYDfxbMV5FM3vcV8jUuUJAOQ3JGSNVvRAKE1M8kv7v+JkxUxqctdwnnQ==
+  dependencies:
+    is-my-json-valid "^2.20.0"
+
+chainpoint-proof-json-schema@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-2.0.3.tgz#e9528334cb7dabcc5c03493b85270883c5f60a49"
+  integrity sha512-siL/28Z6MbfjLG4q8bJ/c2BPujWT2kl1GZECxEhOMM0R66MweBOsDsXEgWfoPYOI/xxcTiK9+bBPOfJ0TvTrmw==
   dependencies:
     is-my-json-valid "^2.20.0"
 

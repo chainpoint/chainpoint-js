@@ -1,25 +1,20 @@
+# Important:
+
+The package is for the Chainpont v4 Network. If you are looking to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
+
 # Chainpoint Client (JavaScript)
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/l/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
 [![npm](https://img.shields.io/npm/v/chainpoint-js.svg)](https://www.npmjs.com/package/chainpoint-js)
-[![Build Status](https://travis-ci.com/chainpoint/chainpoint-js.svg?branch=master)](https://travis-ci.com/chainpoint/chainpoint-js)
-[![Coverage Status](https://coveralls.io/repos/github/chainpoint/chainpoint-js/badge.svg?branch=master)](https://coveralls.io/github/chainpoint/chainpoint-js?branch=master)
 
 ## About
 
 A client for creating and verifying [Chainpoint](https://chainpoint.org) proofs.
 
-The Chainpoint-JS Client handles communication with a distributed network of Nodes that make up the Chainpoint Network.
-
-The Chainpoint-JS Client lets you submit hashes to a Chainpoint Gateway on the Chainpoint Network. Gateways periodically aggregate hashes and send data to Core for anchoring the hash to public blockchains.
+The Chainpoint-JS Client lets you submit hashes to one or more Chainpoint Gateways. Gateways periodically aggregate hashes and send data to a Chainpoint Core for anchoring the hash to public blockchains.
 
 The Chainpoint-JS Client lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
-
-This client can be used in both Browser and Node.js based JavaScript applications using `callback` functions, Promises (using `.then`, `.catch`), or Promises (using `async`/`await`) functional styles.
-
-**Important:** This library has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
-If you would like to still use this library for older proofs, please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client) version v1.x.x
 
 ## Proof Creation and Verification Overview
 
@@ -27,7 +22,7 @@ Creating a Chainpoint proof is an asynchronous process. This client handles all 
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Node. The Node will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof.
+This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof.
 
 ### Get Proof(s)
 
@@ -88,8 +83,7 @@ runIt()
 ## Public API
 
 The following public functions are exported from this client. All functions in the client library are written
-using Promises in the async/await style where possible. Previous versions were written in the Nodejs callback
-style, but that has since been deprecated.
+using Promises in the async/await style where possible.
 
 Additionally, the output of each function in the process has been designed so that it can be used as the input to the next with no need to manipulate the data.
 
@@ -111,13 +105,13 @@ The optional `uris` argument accepts an Array of Gateway URIs. Each element of t
 
 #### Return Values
 
-The return value from this function is an Array of Objects, one for each hash submitted. Each result Object has the information needed to retrieve a proof for a submitted hash. There will be one Object for every Node a hash was submitted to.
+The return value from this function is an Array of Objects, one for each hash submitted. Each result Object has the information needed to retrieve a proof for a submitted hash. There will be one Object for every Gateway a hash was submitted to.
 
 The Array of Objects, referred to as `proofHandles` can also be submitted directly as the argument to the `getProofs()` function. It typically takes about 10 seconds for initial Calendar proofs to become available.
 
 The Object will contain:
 
-`uri` : The URI of the Gateway(s) the hash was submitted to. This is the only Node that can retrieve this particular proof.
+`uri` : The URI of the Gateway(s) the hash was submitted to. This is the only Gateway that can retrieve this particular proof.
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
@@ -162,13 +156,13 @@ The optional `uris` argument accepts an Array of Gateways URIs. Each element of 
 
 #### Return Values
 
-The return value from this function is an Array of Objects, one for each hash submitted. Each result Object has the information needed to retrieve a proof for a submitted hash. There will be one Object for every Node a hash was submitted to.
+The return value from this function is an Array of Objects, one for each hash submitted. Each result Object has the information needed to retrieve a proof for a submitted hash. There will be one Object for every Gateway a hash was submitted to.
 
 The Array of Objects, referred to as `proofHandles` can also be submitted directly as the argument to the `getProofs()` function. It typically takes about 10 seconds for initial Calendar proofs to become available.
 
 The Object will contain:
 
-`uri` : The URI of the Node(s) the hash was submitted to. This is the only Node that can retrieve this particular proof.
+`uri` : The URI of the Gateway(s) the hash was submitted to. This is the only Gateway that can retrieve this particular proof.
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
@@ -209,7 +203,7 @@ This function is used to retrieve Chainpoint proofs from the Gateways that are r
 
 The `proofHandles` argument accepts an Array of Objects. Each object must have the `uri` and `proofId` properties. The argument is of the same form as the output from the `submitHashes()` function.
 
-The `uri` property should be the base URI (e.g. `http://0.0.0.0`) of an online Node that is responsible for generating a particular proof.
+The `uri` property should be the base URI (e.g. `http://0.0.0.0`) of an online Gateway that is responsible for generating a particular proof.
 
 The `proofId` property is a valid Version 1 UUID as provided by the return of the `submitHashes()` function.
 
@@ -261,7 +255,7 @@ If an Object it can be a Chainpoint 4.0 proof as an Object, or have a `proof` pr
 
 Proof types can be mixed freely in the `proofs` arg Array.
 
-The `uri` property should be the base URI (e.g. `http://0.0.0.0`) of an online Node that will be responsible for providing a hash value from the Calendar block specified in the proof. The hash value provided will then be compared to the result of calculating all of the operations in the proof locally. If the locally calculated values matches the server provided value it verifies that the proof is valid.
+The `uri` property should be the base URI (e.g. `http://0.0.0.0`) of an online Gateway that will be responsible for providing a hash value from the Calendar block specified in the proof. The hash value provided will then be compared to the result of calculating all of the operations in the proof locally. If the locally calculated values matches the server provided value it verifies that the proof is valid.
 
 At no time is the proof sent over the Internet during this process (although it is safe to do so).
 
@@ -368,67 +362,6 @@ The optional `num` argument determines the maximum number of Cores that should b
 #### Return Values
 
 This function returns an Array of String URIs.
-
-## Usage : Functional Styles
-
-This client can be used with several popular JavaScript API styles in both Node.js and the Browser.
-The choice of API style is left to the developer and should be based on support for
-each style in the intended runtime platform and the developer's preference.
-
-The callback style is fully supported everywhere,
-while Promises and `async/await` support will depend on the version of Node.js or Browser
-being targetted. Each public API exported from this module supports each style equally.
-
-### Callback Style Example [DEPRECATED]
-
-```javascript
-var cp = require('chainpoint-js')
-
-let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
-
-cp.submitHashes(hashes, function(err, data) {
-  if (err) {
-    // `err` will contain any returned Error object and halt execution
-    throw err
-  }
-
-  // If no error `data` will contain the returned values
-  console.log(JSON.stringify(data, null, 2))
-})
-```
-
-### Promises `.then/.catch` Style Example
-
-```javascript
-var cp = require('chainpoint-js')
-
-let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
-
-cp.submitHashes(hashes, testGatewaysArray)
-  .then(function(data) {
-    // `data` will contain the returned values
-    console.log(JSON.stringify(data, null, 2))
-  })
-  .catch(function(err) {
-    // `err` will contain any returned Error object
-    console.log(err)
-  })
-```
-
-### Promises `async/await` Style Example
-
-```javascript
-var cp = require('chainpoint-jst')
-
-let hashes = ['9d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a']
-
-async function runIt() {
-  let data = await cp.submitHashes(hashes)
-  console.log(JSON.stringify(data, null, 2))
-}
-
-runIt()
-```
 
 ### JavaScript Client-Side Frameworks Example
 
