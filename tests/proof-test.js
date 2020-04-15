@@ -183,8 +183,4 @@ describe('proof utilities', () => {
       })
     })
   })
-
-  describe('flattenBtcBranches', () => {
-    it('should return an array of objects with hash_id_node and raw btc tx')
-  })
 })
