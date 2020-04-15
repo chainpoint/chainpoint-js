@@ -19,7 +19,7 @@ The Chainpoint-JS Client lets you retrieve and verify a Chainpoint proof. Each p
 This client can be used in both Browser and Node.js based JavaScript applications using `callback` functions, Promises (using `.then`, `.catch`), or Promises (using `async`/`await`) functional styles.
 
 **Important:** This library has been updated for v4 of the Chainpoint network. This means that it won't work for older proofs and instead interacts with Gateways on the new network.
-If you would like to still use this library for older proofs, please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client) version v1.x.x
+If you would like to still use this library for older proofs, please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client) versiong v1.x.x
 
 ## Proof Creation and Verification Overview
 
