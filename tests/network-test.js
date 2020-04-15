@@ -3,8 +3,8 @@ import { expect } from 'chai'
 import { network } from '../lib/utils'
 
 describe('network utilities', () => {
-  describe('isValidNodeURI', () => {
-    it('should only pass valid node URIs', () => {
+  describe('isValidGatewayURI', () => {
+    it('should only pass valid gateway URIs', () => {
       let validURIs = ['http://123.45.64.2', 'https://123.54.32.11']
       let invalidURIs = [
         123, // should only accept strings
@@ -13,8 +13,8 @@ describe('network utilities', () => {
         '123.45.66.3', // must have protocol
         'ftp://123.45.66.3' // only accept http or https protocol
       ]
-      validURIs.forEach(uri => expect(network.isValidNodeURI(uri), `expected ${uri} to be validated`).to.be.true)
-      invalidURIs.forEach(uri => expect(network.isValidNodeURI(uri), `expected ${uri} to be validated`).to.be.false)
+      validURIs.forEach(uri => expect(network.isValidGatewayURI(uri), `expected ${uri} to be validated`).to.be.true)
+      invalidURIs.forEach(uri => expect(network.isValidGatewayURI(uri), `expected ${uri} to be validated`).to.be.false)
     })
   })
 
