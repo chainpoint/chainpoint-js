@@ -26,7 +26,7 @@ describe('getProofs', () => {
       if (isEmpty(nodes[handle.uri])) {
         nodes[handle.uri] = []
       }
-      nodes[handle.uri].push(handle.hashIdNode)
+      nodes[handle.uri].push(handle.proofId)
     })
   })
 
@@ -73,11 +73,11 @@ describe('getProofs', () => {
     expect(invalidHandle, 'Should have thrown with an invalid handle').to.be.true
 
     try {
-      await getProofs([{ ...proofHandles[0], hashIdNode: '123456' }])
+      await getProofs([{ ...proofHandles[0], proofId: '123456' }])
     } catch (e) {
       badUUID = true
     }
-    expect(badUUID, 'Should have thrown with an invalid hashIdNode').to.be.true
+    expect(badUUID, 'Should have thrown with an invalid proofId').to.be.true
   })
 
   describe('network responses', () => {
