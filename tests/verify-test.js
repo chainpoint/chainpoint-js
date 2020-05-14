@@ -31,6 +31,9 @@ describe('verifyProofs', function() {
   })
 
   it('should evaluate proofs', async () => {
+    nock(uri)
+      .get(`/calendar/${evaluatedProof['anchor_id']}/data`)
+      .reply(200, [evaluatedProof['expected_value']])
     sinon.spy(evaluate, 'evaluateProofs')
     await verifyProofs(proof)
     expect(evaluate.evaluateProofs.called).to.be.true
