@@ -55,6 +55,7 @@ async function runIt() {
     '3d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a'
   ]
 
+  // These are the default public gateways
   let uris = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
 
   // Submit each hash to selected Gateways
@@ -75,6 +76,8 @@ async function runIt() {
   let verifiedProofs = await chp.verifyProofs(proofs)
   console.log('Verified Proof Objects: Expand objects below to inspect.')
   console.log(verifiedProofs)
+
+  // Wait 90 minutes for Bitcoin anchor proof, then run getProofs again
 }
 
 runIt()
