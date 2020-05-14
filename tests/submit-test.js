@@ -100,7 +100,7 @@ describe('submitHashes', () => {
     // has a body object with the hashes
     let reqBodies = {}
     nodes.forEach(uri => (reqBodies[uri] = false))
-    mockResponses = mockResponses.map(mock =>
+    mockResponses = mockResponses.slice(0, 2).map(mock =>
       mock.filteringRequestBody(body => {
         // remove the port ":80" at the end of the uri
         let uri = mock.basePath.slice(0, -3)
@@ -110,7 +110,7 @@ describe('submitHashes', () => {
       })
     )
 
-    await submitHashes(hashes)
+    await submitHashes(hashes, nodes)
 
     mockResponses.forEach(resp => expect(resp.isDone()).to.be.true)
     nodes.forEach(uri => expect(reqBodies[uri]).to.be.true)
@@ -118,7 +118,7 @@ describe('submitHashes', () => {
 
   it('should return mapped proof handles after successful submission', async () => {
     sinon.spy(proofs, 'mapSubmitHashesRespToProofHandles')
-    let testHandles = await submitHashes(hashes)
+    let testHandles = await submitHashes(hashes, nodes)
 
     expect(proofs.mapSubmitHashesRespToProofHandles.called, 'Did not map to proof handles').to.be.true
 
