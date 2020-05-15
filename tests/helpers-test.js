@@ -55,17 +55,27 @@ describe('helpers utilities', () => {
   describe('fetchEndpoints', () => {
     it('should return all responses from designated endpoints', async () => {
       let requests = [
-        { uri: 'http://test.com', method: 'GET', mockResponse: 'GET success!' },
-        { uri: 'http://test.com', method: 'POST', body: { foo: 'bar' }, mockResponse: 'POST success!' }
+        { uri: 'http://test.com', method: 'GET', mockResponse: { message: 'GET success!' } },
+        { uri: 'http://test.com', method: 'POST', body: { foo: 'bar' }, mockResponse: { message: 'POST success!' } }
       ]
       requests.forEach(({ uri, method, body, mockResponse }) =>
         nock(uri)
           .intercept('/', method, body)
-          .reply(200, { data: mockResponse })
+          .reply(200, mockResponse)
       )
 
       const fetchMap = await helpers.fetchEndpoints(requests)
-      fetchMap.forEach((res, index) => expect(res.data).to.equal(requests[index].mockResponse))
+      console.log('fetchMap', fetchMap)
+      fetchMap.forEach((res, index) => {
+        expect(res).to.have.property('uri')
+        expect(res).to.have.property('response')
+        expect(res.response)
+          .to.have.property('message')
+          .and.to.equal(requests[index].mockResponse.message)
+        expect(res)
+          .to.have.property('error')
+          .and.to.equal(null)
+      })
     })
   })
 
