@@ -65,7 +65,6 @@ describe('helpers utilities', () => {
       )
 
       const fetchMap = await helpers.fetchEndpoints(requests)
-      console.log('fetchMap', fetchMap)
       fetchMap.forEach((res, index) => {
         expect(res).to.have.property('uri')
         expect(res).to.have.property('response')
