@@ -22,7 +22,7 @@ Creating a Chainpoint proof is an asynchronous process. This client handles all 
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof.
+This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discovery free Gateways, but this can be overridden by passing an array of Gateway URIs as an argument.
 
 ### Get Proof(s)
 
