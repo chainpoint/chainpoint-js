@@ -1,6 +1,6 @@
 # Important:
 
-Chainpoint-JS is for use with the Chainpont v4 Network. If you need to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
+Chainpoint-js is for use with the Chainpont v4 Network. If you need to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
 
 # Chainpoint Client (JavaScript)
 
@@ -10,17 +10,17 @@ Chainpoint-JS is for use with the Chainpont v4 Network. If you need to work with
 
 ## About
 
-A javascript client for creating and verifying [Chainpoint](https://chainpoint.org) proofs.
+Chainpoint-js is a javascript client for creating and verifying [Chainpoint](https://chainpoint.org) proofs. Each proof cryptographically proves the integrity and existence of data at a point in time. This client handles all the steps for submitting hashes, retrieving proofs, and verifying proofs. 
 
-Chainpoint-JS lets you submit hashes to one or more Chainpoint Gateways. Gateways periodically aggregate hashes and send data to a Chainpoint Core for anchoring the hash to public blockchains. Chainpoint-JS lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
+See [Chainpoint Start](https://github.com/chainpoint/chainpoint-start) for an overview of the Chainpoint Network.
 
 ## Proof Creation and Verification Overview
 
-Creating a Chainpoint proof is an asynchronous process. This client handles all the steps for submitting hashes, retrieving proofs, and verifying proofs.
+Creating a Chainpoint proof is an asynchronous process.
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discover public Gateways, but this can be overridden by passing an array of Gateway URIs as an argument (as in the example above).
+This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. Chainpoint-js will automatically attempt to connect to three public Gateways. This default behavior can be overridden to submit hashes to specific Gateways by passing an array of Gateway URIs as an argument (see example below).
 
 ### Get Proof(s)
 
@@ -28,7 +28,7 @@ Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint
 
 Proofs are appended with data as they are anchored to additional blockchains. For example, it takes 60 - 90 minutes to anchor a proof to Bitcoin. Calling getProofs will now append the first proof with data that anchors it to the Bitcoin Blockchain.
 
-Gateways retain proofs for 24 hours. Each client must retrieve and permanently store each Chainpoint proof.
+Gateways retain proofs for 24 hours. Clients must retrieve and permanently store each Chainpoint proof.
 
 ### Verify Proof(s)
 
@@ -92,8 +92,6 @@ using Promises in the async/await style. The output of each function can be used
 #### Description
 
 Use this function to submit an Array of hashes, and receive back the information needed to later retrieve a proof for each of those hashes using the `getProofs()` function.
-
-By default hashes are submitted to Gateways to help ensure a proof will become available at the appropriate time. Only one such proof need be permanently stored, the others provide redundancy.
 
 #### Arguments
 
