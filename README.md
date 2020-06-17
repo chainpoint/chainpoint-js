@@ -20,7 +20,7 @@ Creating a Chainpoint proof is an asynchronous process. This client handles all 
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discover public Gateways, but this can be overridden by passing an array of Gateway URIs as an argument.
+This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discover public Gateways, but this can be overridden by passing an array of Gateway URIs as an argument (as in the example above).
 
 ### Get Proof(s)
 
@@ -53,7 +53,8 @@ async function runIt() {
     '3d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a'
   ]
 
-  // These are the default public gateways
+  // This line is only needed when specifying your own Gateway URIs. 
+  // Otherwise when the `uris` argument is omitted, automatic public Gateway discovery will be used.
   let uris = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
 
   // Submit each hash to selected Gateways
