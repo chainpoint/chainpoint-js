@@ -1,6 +1,6 @@
 # Important:
 
-The package is for the Chainpont v4 Network. If you are looking to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
+Chainpoint-JS is for use with the Chainpont v4 Network. If you need to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
 
 # Chainpoint Client (JavaScript)
 
@@ -10,11 +10,9 @@ The package is for the Chainpont v4 Network. If you are looking to work with the
 
 ## About
 
-A client for creating and verifying [Chainpoint](https://chainpoint.org) proofs.
+A javascript client for creating and verifying [Chainpoint](https://chainpoint.org) proofs.
 
-The Chainpoint-JS Client lets you submit hashes to one or more Chainpoint Gateways. Gateways periodically aggregate hashes and send data to a Chainpoint Core for anchoring the hash to public blockchains.
-
-The Chainpoint-JS Client lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
+Chainpoint-JS lets you submit hashes to one or more Chainpoint Gateways. Gateways periodically aggregate hashes and send data to a Chainpoint Core for anchoring the hash to public blockchains. Chainpoint-JS lets you retrieve and verify a Chainpoint proof. Each proof cryptographically proves the integrity and existence of data at a point in time.
 
 ## Proof Creation and Verification Overview
 
@@ -22,7 +20,7 @@ Creating a Chainpoint proof is an asynchronous process. This client handles all 
 
 ### Submit Hash(es)
 
-This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discovery free Gateways, but this can be overridden by passing an array of Gateway URIs as an argument.
+This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gateway will return a Version 1 UUID for each hash submitted. This `proofId` is used later for retrieving a proof. By default the client attempts to discover public Gateways, but this can be overridden by passing an array of Gateway URIs as an argument.
 
 ### Get Proof(s)
 
@@ -34,11 +32,11 @@ Gateways retain proofs for 24 hours. Each client must retrieve and permanently s
 
 ### Verify Proof(s)
 
-Anyone with a Chainpoint proof can verify that it cryptographically anchors to one or more of the public blockchains. The verification process performs the operations in the proof to re-create a Merkle root. This value is compared to a Merkle root stored in the public blockchain. If the values match, the proof is valid.
+Anyone with a Chainpoint proof can verify that it cryptographically anchors to one or more public blockchains. The verification process performs the operations in the proof to re-create a Merkle root. This value is compared to a Merkle root stored in the public blockchain. If the values match, the proof is valid.
 
 ### Evaluate Proof(s)
 
-This function is similar to the Verify function. The difference with this function is that it only calculates and returns the expected values for each anchor. This function does not verify that the expected values exist on the public blockchains. In most common cases, you will want to use Verify instead.
+This function calculates and returns the expected values for each anchor. This function does not verify that the expected values exist on the public blockchains. In most common cases, you will want to use Verify instead.
 
 ## TL;DR
 
@@ -85,10 +83,8 @@ runIt()
 
 ## Public API
 
-The following public functions are exported from this client. All functions in the client library are written
-using Promises in the async/await style where possible.
-
-Additionally, the output of each function in the process has been designed so that it can be used as the input to the next with no need to manipulate the data.
+The following public functions are exported from this client. Where possible, functions in the client library are written
+using Promises in the async/await style. The output of each function can be used as the input to the next function with no need to manipulate the data.
 
 ### `submitHashes(hashes, uris)`
 
@@ -102,7 +98,7 @@ By default hashes are submitted to Gateways to help ensure a proof will become a
 
 The `hashes` argument expects an Array of hashes, where each hash is a Hexadecimal String `[a-fA-F0-9]` between 160 bits (20 Bytes, 40 Hex characters) and 512 bits (64 Bytes, 128 Hex characters) in length. The Hex string must be an even length.
 
-We recommend using the SHA-256 cryptographic one-way hash function for all hashes submitted.
+We recommend using the SHA-256 hash function for all hashes submitted.
 
 The optional `uris` argument accepts an Array of Gateway URIs. Each element of the returned Array is a full URI with `scheme://hostname[:port]` (e.g. `http://127.0.0.1` or `http://127.0.0.1:80`).
 
@@ -118,7 +114,7 @@ The Object will contain:
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
-`ProofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
+`proofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
 
 `groupId` : A Version 1 UUID which is used to group Proof Handles that have the same corresponding hash. The groupId can later be used to optimize the proof retrieval process.
 
@@ -169,7 +165,7 @@ The Object will contain:
 
 `hash` : A copy of the hash that was originally submitted that will be embedded in a future proof. This allows for easier correlation between hashes submitted and the Hash ID handle needed to retrieve a proof.
 
-`ProofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
+`proofId` : The Version 1 UUID that can be used to retrieve the proof for a submitted hash from the `/proofs/:id` endpoint of the Gateway it was submitted to.
 
 `path` : The path of the file represented by this object.
 
@@ -395,7 +391,7 @@ Or install the `npm` package in a place available to your web server pages and s
 [Apache License, Version 2.0](https://opensource.org/licenses/Apache-2.0)
 
 ```txt
-Copyright (C) 2017-2018 Tierion
+Copyright (C) 2017-2020 Tierion
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
