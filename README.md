@@ -55,7 +55,8 @@ async function runIt() {
     '3d2a9e92b561440e8d27a21eed114f7018105db00262af7d7087f7dea9986b0a'
   ]
 
-  // These are the default public gateways
+  // This line is only needed when specifying your own Gateway URIs. 
+  // Otherwise when the `uris` argument is omitted, automatic public Gateway discovery will be used.
   let uris = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
 
   // Submit each hash to selected Gateways
