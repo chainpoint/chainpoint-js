@@ -24,7 +24,7 @@ This is an HTTP request that passes an Array of hash(es) to a Gateway. The Gatew
 
 ### Get Proof(s)
 
-Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint Core. This takes up to a minute. Retrieving a `proofId` at this stage returns a proof anchored to the Calendar.
+Proofs are first anchored to the 'Calendar' chain maintained by every Chainpoint Core. This takes around 2 minutes. Retrieving a `proofId` at this stage returns a proof anchored to the Calendar.
 
 Proofs are appended with data as they are anchored to additional blockchains. For example, it takes 60 - 90 minutes to anchor a proof to Bitcoin. Calling getProofs will now append the first proof with data that anchors it to the Bitcoin Blockchain.
 
