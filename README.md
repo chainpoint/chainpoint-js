@@ -42,7 +42,7 @@ This function calculates and returns the expected values for each anchor. This f
 
 ## Examples
 
-[Try It Out with RunKit](https://runkit.com/grempe/tierion-chainpoint-client-async-example)
+[Try It Out with RunKit](https://runkit.com/jacohend/tierion-chainpoint-client-example)
 
 ```javascript
 const chp = require('chainpoint-js')
