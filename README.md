@@ -57,7 +57,7 @@ async function runIt() {
 
   // This line is only needed when specifying your own Gateway URIs.
   // Otherwise when the `uris` argument is omitted, automatic public Gateway discovery will be used.
-  let uris = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
+  let uris = ['http://3.133.135.157', 'http://18.191.50.129', 'http://18.224.185.143']
 
   // Submit each hash to selected Gateways
   let proofHandles = await chp.submitHashes(hashes, uris)
