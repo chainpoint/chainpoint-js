@@ -1,6 +1,6 @@
 # Important:
 
-Chainpoint-js is for use with the Chainpont v4 Network. If you need to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
+Chainpoint-js is for use with the Chainpoint v4 Network. If you need to work with the older Chainpoint v3 Network (chainpoint-services), please use [chainpoint-client](https://www.npmjs.com/package/chainpoint-client).
 
 # Chainpoint Client (JavaScript)
 
