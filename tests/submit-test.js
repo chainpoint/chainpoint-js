@@ -27,7 +27,7 @@ describe('submitHashes', () => {
   beforeEach(async () => {
     // steb getNodes so that we can be sure it was called
     // but can control what it returns and test expectations
-    let nodes = ['http://3.17.155.208', 'http://18.191.50.129', 'http://18.224.185.143']
+    let nodes = ['http://18.224.185.143', 'http://3.133.135.157']
 
     mockResponses = nodes.map((uri, index) =>
       nock(uri)
