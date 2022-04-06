@@ -1657,17 +1657,10 @@ chainpoint-binary@^5.1.0:
     msgpack-lite "^0.1.26"
     pako "^1.0.10"
 
-"chainpoint-binary@https://github.com/chainpoint/chainpoint-binary.git#v5":
-  version "5.1.0"
-  resolved "https://github.com/chainpoint/chainpoint-binary.git#5cdba770a1b644b2a5a34881b78bf5af4a910fe5"
-  dependencies:
-    chainpoint-proof-json-schema "^2.1.0"
-    msgpack-lite "^0.1.26"
-    pako "^1.0.10"
-
-"chainpoint-parse@https://github.com/chainpoint/chainpoint-parse.git#v5":
+chainpoint-parse@^5.0.0:
   version "5.0.0"
-  resolved "https://github.com/chainpoint/chainpoint-parse.git#02dcba66ff186087ccbccf7e19258780fd7baa86"
+  resolved "https://registry.yarnpkg.com/chainpoint-parse/-/chainpoint-parse-5.0.0.tgz#441886b925bf66df659e60fc932f3fceb4967d3f"
+  integrity sha512-M+zvHYBBzS9dd8KAV8sntGUPp3zfDRqDEqQSEY+XOTw3GuLGz8llhsJ5gWsaehpcKIe8y4CmlPvVUBzyvcKx9Q==
   dependencies:
     chainpoint-binary "^5.1.0"
     chainpoint-proof-json-schema "^2.1.0"
@@ -3358,6 +3351,11 @@ iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
+
+id128@^1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/id128/-/id128-1.6.6.tgz#cfbbf2c7569071694c7e55323dde40e457ae14e3"
+  integrity sha512-ExSXL9qcyQ7X/AfyO4ouARLnztm7Nmry1rwGi1nbrtSM90tjjqKzeMKqJfkw5bDdDX7XqdXIRzYYkVj5PU28Hg==
 
 ieee754@^1.1.4:
   version "1.1.8"
